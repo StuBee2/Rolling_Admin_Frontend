@@ -1,0 +1,34 @@
+import { AxiosError } from "axios";
+import Token from "../Token/token";
+import { customAxios } from "./customAxios";
+import {
+  REQUEST_TOKEN_KEY,
+  ACCESS_TOKEN_KEY,
+  REFRESH_TOKEN_KEY,
+} from "../../constants/Auth/auth.constants";
+import authAdapter from "../../services/Auth/auth.adapter";
+
+export const responseHandler = async (config: AxiosError) => {
+  const access_token = Token.getToken(ACCESS_TOKEN_KEY);
+  const refresh_token = Token.getToken(REFRESH_TOKEN_KEY);
+
+  if (access_token && refresh_token && config.response?.status === 401) {
+    try {
+      const { accessToken } = await authAdapter.postRefreshToken(refresh_token);
+
+      Token.setToken(ACCESS_TOKEN_KEY, accessToken);
+
+      customAxios.defaults.headers.common[
+        REQUEST_TOKEN_KEY
+      ] = `Bearer ${accessToken}`;
+    } catch (e) {
+      window.alert("세션이 만료되었습니다!");
+      Token.clearToken();
+      window.location.href = "/signin";
+    }
+  }
+  if (config.response?.status === 500) {
+    return Promise.reject(config);
+  }
+  return Promise.resolve(config);
+};
