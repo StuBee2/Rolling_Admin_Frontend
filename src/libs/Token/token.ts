@@ -2,7 +2,7 @@ import cookie from "js-cookie";
 import {
   ACCESS_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
-} from "../../constants/Auth/auth.constants";
+} from "../../domain/Auth/auth.domain";
 
 interface Storage {
   getToken(key: string): string | undefined;

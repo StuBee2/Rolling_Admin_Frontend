@@ -1,11 +1,12 @@
 import axios from "axios";
 import CONFIG from "../../config/config.json";
+
+import token from "../Token/token";
+import { responseHandler } from "./responseHandler";
 import {
   REQUEST_TOKEN_KEY,
   ACCESS_TOKEN_KEY,
-} from "../../constants/Auth/auth.constants";
-import token from "../Token/token";
-import { responseHandler } from "./responseHandler";
+} from "../../domain/Auth/auth.domain";
 
 export const customAxios = axios.create({
   baseURL: `${CONFIG.SERVER}`,

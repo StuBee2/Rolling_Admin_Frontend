@@ -1,12 +1,12 @@
 import { AxiosError } from "axios";
 import Token from "../Token/token";
 import { customAxios } from "./customAxios";
+import authAdapter from "../../services/Auth/auth.adapter";
 import {
-  REQUEST_TOKEN_KEY,
   ACCESS_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
-} from "../../constants/Auth/auth.constants";
-import authAdapter from "../../services/Auth/auth.adapter";
+  REQUEST_TOKEN_KEY,
+} from "../../domain/Auth/auth.domain";
 
 export const responseHandler = async (config: AxiosError) => {
   const access_token = Token.getToken(ACCESS_TOKEN_KEY);
