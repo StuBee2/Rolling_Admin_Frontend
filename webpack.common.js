@@ -38,7 +38,9 @@ module.exports = {
     new RefreshWebpackPlugin(),
   ],
   resolve: {
-    modules: [path.resolve(__dirname, "src"), "node_modules"],
     extensions: [".js", ".ts", ".jsx", ".tsx"],
+    alias: {
+      "@src": path.resolve(__dirname, "./src"),
+    },
   },
 };
