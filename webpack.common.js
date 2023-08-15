@@ -5,7 +5,7 @@ const RefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
   entry: {
-    main: path.resolve("./src/index.tsx"),
+    main: path.resolve("./src/presentation/index.tsx"),
   },
   output: {
     path: path.resolve(__dirname, "dist/"),
